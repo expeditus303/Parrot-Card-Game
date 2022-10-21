@@ -5,7 +5,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.body {
+.game {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,10 +22,11 @@ body {
     text-align: center;
 }
 
-.container_card {
+.containerCard {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 7px; 
 }
 
 .card {
@@ -38,9 +39,14 @@ body {
     align-items: center;
 }
 
-.card img {
+.containerCard img {
     display: block;
     width: 100px;
+    height: 100px;
+}
+
+.hidden {
+    display: none;
 }
 
 @media (max-width: 614px) {
