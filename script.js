@@ -4,6 +4,7 @@ let cards = []
 cardsTurnedCounter = 0;
 let movesCounter = 0
 let hitsCounter = 0
+const removeCard = document.querySelectorAll('.card')
 
 askCardsNumber()
 
@@ -15,7 +16,6 @@ function askCardsNumber () {
     }
 
     insertGifs()
-    
 }
 
 // ---------------------------------
@@ -29,7 +29,7 @@ function insertGifs() {
         selectedCards.push(i)
     }
 
-    selectedCards.sort(sort)
+    selectedCards.sort(sort);
 
     createCard()
 }
@@ -66,15 +66,37 @@ function turnCard(card) { // função que faz o efeito da carta virando ao clica
 
     if (cardsTurnedCounter == 2) {
         cards = document.querySelectorAll('.turned')
+        cards = Array.from(cards)
+        cards.reverse()
         console.log(cards)
         
         compareCards(cards)
         cardsTurnedCounter = 0;
         cards = []
-        console.log(cardsTurnedCounter)
+
     }
 } 
 
+function turnCardBack() {
+    const cardsBack = document.querySelectorAll('.notChosen');
+    for (let i = 0; cardsBack.length > i; i++) {
+        cardsBack[i].classList.remove('turned')
+    }
+}
+
+
+
+function compareCards() {
+    if (cards[0].innerHTML == cards[1].innerHTML) {
+        alert('são iguais!')
+        removeCard.classList.remove('notChosen')
+
+        
+    
+    } else {
+        setTimeout(turnCardBack, 3000)
+    }
+}
 
 
 
