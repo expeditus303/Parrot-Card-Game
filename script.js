@@ -1,39 +1,83 @@
-// BREAK
-let cardNumber = 1;
-let cards = [];
-const containerCard = document.querySelector('div.containerCard');
+let cardsNumber = 0; // Variável que recebe a quantidade de cartas que o jogador quer jogar
+const selectedCards = []
+let cards = []
+cardsTurnedCounter = 0;
+let movesCounter = 0
+let hitsCounter = 0
+
+askCardsNumber()
 
 
+// Perguntar quantas cartas e validar 
+function askCardsNumber () {
+    while (cardsNumber % 2 !== 0 || cardsNumber < 4 || cardsNumber > 14) {
+        cardsNumber = prompt ('Escolha a quantidade de cartas que você quer jogar (digite um número par entre 4 e 14)')
+    }
 
-while (cardNumber % 2 !== 0 || cardNumber < 4 || cardNumber > 14) {
-    cardNumber = Number(prompt("Digite o número de cartas que deseja jogar (apenas números pares de 4 a 14", 0));
+    insertGifs()
+    
 }
 
-let gifs =[] // lista com os gifs
-for (let i = 0; (cardNumber / 2) > i; i++){
- gifs.push(i)
- gifs.push(i)
+// ---------------------------------
+
+
+// INSERIR GIFS DUAS VEZES E EMBARALHAR
+
+function insertGifs() {
+    for (let i = 0; (cardsNumber / 2) > i; i++) {
+        selectedCards.push(i)
+        selectedCards.push(i)
+    }
+
+    selectedCards.sort(sort)
+
+    createCard()
 }
-gifs.sort(comparador)
 
-for (let index = 0; cardNumber > index; index++) {
-    containerCard.innerHTML += `
-    <div class="card">
-        <div class="card-front"><img src="./files/${gifs[index]}.gif" alt="gif ">${index}</div>
-        <div class="card-back"></div>
-    </div>
-    `
+// --------------------------------------
+
+
+
+// CRIAR CARTA
+function createCard() {
+    const main = document.querySelector('.main')
+    for (let i = 0; cardsNumber > i; i++) {
+        main.innerHTML += `
+        <div class="card notChosen A${selectedCards[i]}" onclick="turnCard(this)" >
+            <div class="card-back cards">
+                <img src="./files/${selectedCards[i]}.gif" alt="front">
+            </div>
+            <div class="card-front cards">
+                <img src="./files/front.png" alt="gif ">
+            </div>
+        </div>
+        `
+    }
 }
 
+// -----------------------------------
 
 
-// Esta função pode ficar separada do código acima, onde você preferir
-function comparador() { 
+// VIRAR A CARTA AO CLICADA 
+
+function turnCard(card) { // função que faz o efeito da carta virando ao clicar e mostra através do "moves" se duas cartas foram viradas para serem desviradas
+    card.classList.add('turned');
+    cardsTurnedCounter++;
+
+    if (cardsTurnedCounter == 2) {
+        cards = document.querySelectorAll('.turned')
+        console.log(cards)
+        
+        compareCards(cards)
+        cardsTurnedCounter = 0;
+        cards = []
+        console.log(cardsTurnedCounter)
+    }
+} 
+
+
+
+
+function sort() { 
 	return Math.random() - 0.5; 
 }
-
-
-// for (let c = 0; c < cardNumber; c++) {
-//     cards[c].classList.remove('hidden')
-// }
-  
