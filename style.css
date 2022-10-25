@@ -20,6 +20,20 @@ body {
     color: #75B79E;
     margin-bottom: 47px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer {
+    font-size: 30px;
+    background-color: #75B79E;
+    width: 15%;
+    color: white;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .main {
@@ -48,7 +62,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    
     position: absolute;
+    
     backface-visibility: hidden;
     transition: all 0.5s;
     transform-style: preserve-3d;
@@ -63,10 +79,6 @@ body {
 
 .card-back {
     transform: rotateY(180deg);
-}
-
-.turned {
-    transform: rotateY(0deg);
 }
 
 .turned .card-front {
